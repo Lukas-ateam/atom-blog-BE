@@ -1,13 +1,12 @@
 {
-    "type": "postgres",
-    "host": "localhost",
-    "port": 5432,
-    "username": "test",
-    "password": "test",
-    "database": "postgres",
-    "schema": "test",
-    "entities": ["dist/**/*.entity{.ts,.js}"],
-    "synchronize": true,
-    "cli":{
-    }
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "test",
+  "password": "test",
+  "database": "postgres",
+  "schema": "test",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": true,
+  "cli": {}
 }

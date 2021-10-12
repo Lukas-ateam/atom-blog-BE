@@ -1,16 +1,42 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Entry } from './entry.entity';
 
-@Entity('entry_person')
-export class Entry_Person extends BaseEntity{
-    @PrimaryGeneratedColumn()
-    id!: number
-    
-    @Column()
-    name!: string
+export enum Person_Type {
+  AUTHOR = 'author',
+  CONTRIBUTOR = 'contributor',
+}
 
-//     @ManyToOne(
-//         (type) => Entry
-//     )
-//     entry!: Entry
+@Entity('entry_person')
+export class Entry_Person extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid') // unique
+  uuid: string;
+
+  @Column({
+    type: 'enum',
+    enum: Person_Type,
+  })
+  type: Person_Type;
+
+  @Column()
+  name: string;
+
+  @Column()
+  uri: string;
+
+  @Column()
+  email: string;
+
+  @ManyToOne((type) => Entry)
+  @JoinColumn({
+    name: 'entry',
+    referencedColumnName: 'uuid'
+  })
+  entry: Entry;
 }

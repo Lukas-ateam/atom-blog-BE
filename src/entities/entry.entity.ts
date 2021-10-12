@@ -1,49 +1,65 @@
-import { timeStamp } from "console";
-import { 
-    BaseEntity, 
-    Column, 
-    Entity, 
-    JoinColumn, 
-    OneToMany, 
-    PrimaryGeneratedColumn 
-} from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Entry_Person } from './entry_person.entity';
+import { Entry_Content } from './entry_content.entity';
+import { Entry_Category } from './entry_category.entity';
 
 @Entity('entry')
-export class Entry extends BaseEntity{
-    @PrimaryGeneratedColumn()
-    id!:string;
-    
-    @Column()
-    category!: string
+export class Entry extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid') // unique
+  @OneToOne((type) => Entry_Content, (uuid) => uuid.entry)
+  @JoinColumn({
+    name: 'uuid',
+    referencedColumnName: 'entry'
+  })
+  uuid: string;
 
-    @Column({type: 'timestamp'})
-    published!: string
+  @OneToMany((type) => Entry_Category, (category) => category.entry)
+  category: Entry_Category[];
 
-    @Column()
-    rights!: string
+  @CreateDateColumn({
+    type: 'timestamp',
+    nullable: true,
+  })
+  published: Date;
 
-    @Column()
-    source!: string
+  @UpdateDateColumn({ type: 'timestamp' })
+  updated: Date;
 
-    @Column()
-    summary!: string
+  @Column() // unique not null
+  title: string;
 
-    @Column()
-    title!: string
+  @Column() // unique nullable
+  link: string;
 
-    @Column()
-    author!: string
+  @Column()
+  summary: string;
 
-    @Column()
-    contributor!: string
+  @OneToMany((type) => Entry_Person, (author) => author.entry)
+  author: Entry_Person[];
 
-    @Column({type: 'timestamp'})
-    updated!: string
+  @OneToMany((type) => Entry_Person, (contributor) => contributor.entry)
+  contributor: Entry_Person[];
 
-    // @OneToMany( 
-    //     (author) => Entry_Person,
-    //     (contributor) => Entry_Person
-    // )
-    // person!: Entry_Person  
+  @Column()
+  id: string;
+
+  @Column({
+    nullable: true,
+  })
+  source: string;
+
+  @Column({
+    nullable: true,
+  })
+  rights: string;
 }
