@@ -6,6 +6,7 @@
   "password": "test",
   "database": "postgres",
   "schema": "test",
+  "logging": "all",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true,
   "cli": {}
