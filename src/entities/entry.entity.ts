@@ -12,54 +12,63 @@ import {
 import { Entry_Person } from './entry_person.entity';
 import { Entry_Content } from './entry_content.entity';
 import { Entry_Category } from './entry_category.entity';
+import { Entry_Link } from './entry_link.entity';
 
 @Entity('entry')
 export class Entry extends BaseEntity {
   @PrimaryGeneratedColumn('uuid') // unique
-  @OneToOne((type) => Entry_Content, (uuid) => uuid.entry)
-  @JoinColumn({
-    name: 'uuid',
-    referencedColumnName: 'entry'
+  @OneToOne((type) => Entry_Content, (uuid) => uuid.entry,{
+    cascade: true
   })
   uuid: string;
 
-  @OneToMany((type) => Entry_Category, (category) => category.entry)
+  @OneToMany((type) => Entry_Category, (category) => category.entry,{
+    cascade: true
+  })
   category: Entry_Category[];
 
   @CreateDateColumn({
     type: 'timestamp',
-    nullable: true,
+    nullable: true
   })
   published: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
   updated: Date;
 
-  @Column() // unique not null
+  @Column()
   title: string;
 
-  @Column() // unique nullable
-  link: string;
+  @OneToMany((type) => Entry_Link, (link) => link.entry,{
+    cascade: true
+  })
+  link: Entry_Link[];
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   summary: string;
 
-  @OneToMany((type) => Entry_Person, (author) => author.entry)
-  author: Entry_Person[];
+  @OneToMany((type) => Entry_Person, (author) => author.entry,{
+    cascade: true
+  })
+  author: Entry_Person[]; 
 
-  @OneToMany((type) => Entry_Person, (contributor) => contributor.entry)
+  @OneToMany((type) => Entry_Person, (contributor) => contributor.entry,{
+    cascade: true
+  })
   contributor: Entry_Person[];
 
   @Column()
   id: string;
 
   @Column({
-    nullable: true,
+    nullable: true
   })
   source: string;
 
   @Column({
-    nullable: true,
+    nullable: true
   })
   rights: string;
 }

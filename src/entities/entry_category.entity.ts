@@ -13,19 +13,23 @@ export class Entry_Category extends BaseEntity {
   @PrimaryGeneratedColumn('uuid') // unique
   uuid: string;
 
+  @ManyToOne((type) => Entry,{
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn({
+    name: 'entry',
+    referencedColumnName: 'uuid'
+  })
+  entry: Entry;
+
   @Column()
   term: string;
 
   @Column()
   scheme: string;
 
-  @Column()
-  label: string;
-
-  @ManyToOne((type) => Entry, (entry) => entry.category)
-  @JoinColumn({
-    name: 'entry',
-    referencedColumnName: 'uuid'
+  @Column({
+    nullable: true,
   })
-  entry: Entry;
+  label: string;
 }

@@ -18,6 +18,15 @@ export class Entry_Person extends BaseEntity {
   @PrimaryGeneratedColumn('uuid') // unique
   uuid: string;
 
+  @ManyToOne((type) => Entry,{
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn({
+    name: 'entry',
+    referencedColumnName: 'uuid'
+  })
+  entry: Entry;
+
   @Column({
     type: 'enum',
     enum: Person_Type,
@@ -27,16 +36,13 @@ export class Entry_Person extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   uri: string;
 
-  @Column()
-  email: string;
-
-  @ManyToOne((type) => Entry)
-  @JoinColumn({
-    name: 'entry',
-    referencedColumnName: 'uuid'
+  @Column({
+    nullable: true,
   })
-  entry: Entry;
+  email: string;
 }
