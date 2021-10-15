@@ -6,21 +6,21 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Entry } from './entry.entity';
+import { EntryEntity } from './entry.entity';
 
 @Entity('entry_category')
-export class Entry_Category extends BaseEntity {
+export class EntryCategoryEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid') // unique
   uuid: string;
 
-  @ManyToOne((type) => Entry,{
-    onDelete: 'CASCADE'
+  @ManyToOne((type) => EntryEntity,{
+    onUpdate: 'CASCADE'
   })
   @JoinColumn({
     name: 'entry',
     referencedColumnName: 'uuid'
   })
-  entry: Entry;
+  entry: EntryEntity;
 
   @Column()
   term: string;

@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { EntryController } from './entry/entry.controller';
 import { EntryModule } from './entry/entry.module';
 import { EntryService } from './entry/entry.service';
+import { DatabaseModule } from '../libs/database/database.module';
 
 @Module({
   imports: [
@@ -15,11 +16,10 @@ import { EntryService } from './entry/entry.service';
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
     EntryModule,
-    TypeOrmModule.forRoot(),
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
-  exports: [EntryService]
 })
 export class AppModule {
   // constructor(private connection: Connection) {}

@@ -1,13 +1,16 @@
-/*
 import { Test, TestingModule } from '@nestjs/testing';
 import { EntryController } from './entry.controller';
+import { EntryModule } from './entry.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 describe('EntryController', () => {
   let controller: EntryController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [EntryController],
+      imports: [
+        EntryModule,
+      ]
     }).compile();
 
     controller = module.get<EntryController>(EntryController);
@@ -17,4 +20,3 @@ describe('EntryController', () => {
     expect(controller).toBeDefined();
   });
 });
-*/

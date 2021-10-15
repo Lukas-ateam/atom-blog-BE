@@ -6,21 +6,21 @@ import {
     ManyToOne,
     JoinColumn,
 } from 'typeorm';
-import { Entry } from './entry.entity';
+import { EntryEntity } from './entry.entity';
 
 @Entity('entry_link')
-export class Entry_Link extends BaseEntity {
+export class EntryLinkEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid') // unique
   uuid: string;
 
-  @ManyToOne((type) => Entry,{
-    onDelete: 'CASCADE'
+  @ManyToOne((type) => EntryEntity,{
+    onUpdate: 'CASCADE'
   })
   @JoinColumn({
-      name: 'entry',
-      referencedColumnName: 'uuid'
+    name: 'entry',
+    referencedColumnName: 'uuid'
   })
-  entry: Entry;
+  entry: EntryEntity;
 
   @Column()
   rel: string;
@@ -29,7 +29,7 @@ export class Entry_Link extends BaseEntity {
   href: string;
 
   @Column({
-      nullable: true,
+    nullable: true,
   })
   type: string;
 
@@ -39,7 +39,7 @@ export class Entry_Link extends BaseEntity {
   hreflang: string;
 
   @Column({
-      nullable: true,
+    nullable: true,
   })
   title: string;
   

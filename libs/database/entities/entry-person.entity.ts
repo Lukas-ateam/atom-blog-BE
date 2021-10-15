@@ -6,32 +6,32 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Entry } from './entry.entity';
+import { EntryEntity } from './entry.entity';
 
-export enum Person_Type {
+export enum PersonType {
   AUTHOR = 'author',
   CONTRIBUTOR = 'contributor',
 }
 
 @Entity('entry_person')
-export class Entry_Person extends BaseEntity {
+export class EntryPersonEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid') // unique
   uuid: string;
 
-  @ManyToOne((type) => Entry,{
-    onDelete: 'CASCADE'
+  @ManyToOne((type) => EntryEntity,{
+    onUpdate: 'CASCADE'
   })
   @JoinColumn({
     name: 'entry',
     referencedColumnName: 'uuid'
   })
-  entry: Entry;
+  entry: EntryEntity;
 
   @Column({
     type: 'enum',
-    enum: Person_Type,
+    enum: PersonType,
   })
-  type: Person_Type;
+  type: PersonType;
 
   @Column()
   name: string;

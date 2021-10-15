@@ -1,68 +1,38 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm'; 
 
-import { Repository } from 'typeorm';
-import { Entry } from '../entities/entry.entity';
-import { Entry_Content } from '../entities/entry_content.entity';
-import { Entry_Category } from '../entities/entry_category.entity';
-import { Entry_Person } from '../entities/entry_person.entity';
-import { Entry_Link } from '../entities/entry_link.entity';
+import { EntryEntity } from '../../libs/database/entities/entry.entity';
+import { EntryContentEntity } from '../../libs/database/entities/entry-content.entity';
+import { EntryCategoryEntity } from '../../libs/database/entities/entry-category.entity';
+import { EntryPersonEntity } from '../../libs/database/entities/entry-person.entity';
+import { EntryLinkEntity } from '../../libs/database/entities/entry-link.entity';
+import { EntryRepository } from '../../libs/database/repositories/entry.repository';
+import { EntryContentRepository } from '../../libs/database/repositories/entry-content.repository';
+import { EntryCategoryRepository } from '../../libs/database/repositories/entry-category.repository';
+import { EntryPersonRepository } from 'libs/database/repositories/entry-person.repository';
+import { EntryLinkRepository } from 'libs/database/repositories/entry-link.repository';
+import { EntityManager, getCustomRepository } from 'typeorm';
 
 @Injectable()
 export class EntryService {
-  constructor(
-    @InjectRepository(Entry)
-    private EntryRepository: Repository<Entry>,
-
-    @InjectRepository(Entry_Content)
-    private Entry_ContentRepository: Repository<Entry_Content>,
-
-    @InjectRepository(Entry_Category)
-    private Entry_CategoryRepository: Repository<Entry_Category>,
-
-    @InjectRepository(Entry_Person)
-    private Entry_PersonRepository: Repository<Entry_Person>,
-
-    @InjectRepository(Entry_Link)
-    private Entry_LinkRepository: Repository<Entry_Link>
-  ){}
-
-  // Service
-  async entry_findAll(): Promise<Entry[]> {
-    return this.query_entry_findAll();
+  async readEntryList(): Promise<EntryEntity[]>{
+    const entryRepository: EntryRepository = getCustomRepository<EntryRepository>(EntryRepository);
+    return await entryRepository.findAllEntry();
   }
-  async entry_content_findAll(): Promise<Entry_Content[]> {
-    return this.query_entry_content_findAll();
+  async readEntryContentList(): Promise<EntryContentEntity[]>{
+    const entryContentRepository: EntryContentRepository = getCustomRepository<EntryContentRepository>(EntryContentRepository);
+    return await entryContentRepository.findAllEntryContent();
   }
-  async entry_category_findAll(): Promise<Entry_Category[]> {
-    return this.query_entry_category_findAll();
+  async readEntryCategoryList(): Promise<EntryCategoryEntity[]>{
+    const entryCategoryRepository: EntryCategoryRepository = getCustomRepository<EntryCategoryRepository>(EntryCategoryRepository);
+    return await entryCategoryRepository.findAllEntryCategory();
   }
-  async entry_person_findAll(): Promise<Entry_Person[]> {
-    return this.query_entry_person_findAll();
+  async readEntryPersonList(): Promise<EntryPersonEntity[]>{
+    const entryPersonRepository: EntryPersonRepository = getCustomRepository<EntryPersonRepository>(EntryPersonRepository);
+    return await entryPersonRepository.findAllEntryPerson();
   }
-  async entry_link_findAll(): Promise<Entry_Link[]> {
-    return this.query_entry_link_findAll();
-  }
-
-  // raw Query
-  private async query_entry_findAll(){
-    return await this.EntryRepository.createQueryBuilder('entry')
-    .getMany();
-  }
-  private async query_entry_content_findAll(){
-    return await this.Entry_ContentRepository.createQueryBuilder('entry_content')
-    .getMany();
-  }
-  private async query_entry_category_findAll(){
-    return await this.Entry_CategoryRepository.createQueryBuilder('entry_category')  
-    .getMany();
-  }
-  private async query_entry_person_findAll(){
-    return await this.Entry_PersonRepository.createQueryBuilder('entry_person')
-    .getMany();
-  }
-  private async query_entry_link_findAll(){
-    return await this.Entry_LinkRepository.createQueryBuilder('entry_link')
-    .getMany();  
+  async readEntryLinkList(): Promise<EntryLinkEntity[]>{
+    const entryLinkRepository: EntryLinkRepository = getCustomRepository<EntryLinkRepository>(EntryLinkRepository);
+    return await entryLinkRepository.findAllEntryLink();
   }
 }

@@ -6,19 +6,19 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Entry } from './entry.entity';
+import { EntryEntity } from './entry.entity';
 
-export enum Content_Type {
+export enum ContentType {
   TEXT = 'text',
   HTML = 'html',
   XHTML = 'xhtml',
 }
 
 @Entity('entry_content')
-export class Entry_Content extends BaseEntity {
+export class EntryContentEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  @OneToOne((type) => Entry,{
-    onDelete: 'CASCADE'
+  @OneToOne((type) => EntryEntity,{
+    onUpdate: 'CASCADE'
   })
   @JoinColumn({
     name: 'entry',
@@ -28,9 +28,9 @@ export class Entry_Content extends BaseEntity {
 
   @Column({
     type: 'enum',
-    enum: Content_Type,
+    enum: ContentType,
   })
-  type: Content_Type;
+  type: ContentType;
 
   @Column()
   content: string;
