@@ -8,4 +8,11 @@ export class EntryLinkRepository extends Repository<EntryLinkEntity>{
         // .getMany();
         return this.find();
     }
+    async findEntryLinkById(uuid: string){   
+        return this.find({
+            where: {
+                entry: uuid
+            },
+        })
+    }
 }

@@ -17,9 +17,6 @@ import { EntryLinkEntity } from './entry-link.entity';
 @Entity('entry')
 export class EntryEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid') // unique
-  @OneToOne((type) => EntryContentEntity, (uuid) => uuid.entry,{
-    cascade: true
-  })
   uuid: string;
 
   @OneToMany((type) => EntryCategoryEntity, (category) => category.entry,{
@@ -49,10 +46,10 @@ export class EntryEntity extends BaseEntity {
   })
   summary: string;
 
-  @OneToMany((type) => EntryPersonEntity, (author) => author.entry,{
+  @OneToOne((type) => EntryPersonEntity, (author) => author.entry,{
     cascade: true
   })
-  author: EntryPersonEntity[]; 
+  author: EntryPersonEntity; 
 
   @OneToMany((type) => EntryPersonEntity, (contributor) => contributor.entry,{
     cascade: true
@@ -71,4 +68,9 @@ export class EntryEntity extends BaseEntity {
     nullable: true
   })
   rights: string;
+
+  @OneToOne((type) => EntryContentEntity, (content) => content.entry,{
+    cascade: true
+  })
+  content: EntryContentEntity;
 }

@@ -8,4 +8,11 @@ export class EntryCategoryRepository extends Repository<EntryCategoryEntity>{
         // .getMany();
         return this.find();
     }
+    async findEntryCategoryById(uuid: string){   
+        return this.find({
+            where: {
+                entry: uuid
+            },
+        })
+    }
 }

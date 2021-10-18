@@ -8,4 +8,20 @@ export class EntryPersonRepository extends Repository<EntryPersonEntity>{
         // .getMany();
         return this.find();
     }
+    async findEntryAuthorById(uuid: string){   
+        return this.findOne({
+            where: {
+                entry: uuid,
+                type: "author"
+            },
+        })
+    }
+    async findEntryContributorById(uuid: string){   
+        return this.find({
+            where: {
+                entry: uuid,
+                type: "contributor"
+            },
+        })
+    }
 }
