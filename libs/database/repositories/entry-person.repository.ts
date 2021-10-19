@@ -6,10 +6,10 @@ export class EntryPersonRepository extends Repository<EntryPersonEntity>{
     async findAllEntryPerson(){
         // return await this.createQueryBuilder('entry_person')
         // .getMany();
-        return this.find();
+        return await this.find();
     }
     async findEntryAuthorById(uuid: string){   
-        return this.findOne({
+        return await this.findOne({
             where: {
                 entry: uuid,
                 type: "author"
@@ -17,7 +17,7 @@ export class EntryPersonRepository extends Repository<EntryPersonEntity>{
         })
     }
     async findEntryContributorById(uuid: string){   
-        return this.find({
+        return await this.find({
             where: {
                 entry: uuid,
                 type: "contributor"

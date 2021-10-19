@@ -6,10 +6,10 @@ export class EntryCategoryRepository extends Repository<EntryCategoryEntity>{
     async findAllEntryCategory(){
         // return await this.createQueryBuilder('entry')
         // .getMany();
-        return this.find();
+        return await this.find();
     }
     async findEntryCategoryById(uuid: string){   
-        return this.find({
+        return await this.find({
             where: {
                 entry: uuid
             },

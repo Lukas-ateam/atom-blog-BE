@@ -6,6 +6,6 @@ export class EntryContentRepository extends Repository<EntryContentEntity>{
     async findAllEntryContent(){
         // return await this.createQueryBuilder('entry')
         // .getMany();
-        return this.find();
+        return await this.find();
     }
 }

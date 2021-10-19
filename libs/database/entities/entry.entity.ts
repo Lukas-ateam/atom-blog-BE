@@ -28,10 +28,10 @@ export class EntryEntity extends BaseEntity {
     type: 'timestamp',
     nullable: true
   })
-  published: Date;
+  published: string;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updated: Date;
+  updated: string;
 
   @Column()
   title: string;

@@ -5,7 +5,7 @@ import { CreateEntryDto } from '../../../src/dto/entry.dto';
 @EntityRepository(EntryEntity)
 export class EntryRepository extends Repository<EntryEntity> {
     async findAllEntry(){
-        return this.find({
+        return await this.find({
             join: {
                 alias: "e",
                 leftJoinAndSelect: {
@@ -15,7 +15,7 @@ export class EntryRepository extends Repository<EntryEntity> {
         })
     }
     async findOneEntryById(uuid: string){   
-        return this.findOne({
+        return await this.findOne({
             join: {
                 alias: "e",
                 leftJoinAndSelect: {
@@ -31,6 +31,6 @@ export class EntryRepository extends Repository<EntryEntity> {
     }
     async saveEntry(entryDto: CreateEntryDto){
         
-        return this.create().save();
+        return await this.create().save();
     }
 }

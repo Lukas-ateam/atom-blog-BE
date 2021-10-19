@@ -11,32 +11,33 @@ import { EntryCategoryRepository } from '../../libs/database/repositories/entry-
 import { EntryPersonRepository } from '../../libs/database/repositories/entry-person.repository';
 import { EntryLinkRepository } from '../../libs/database/repositories/entry-link.repository';
 import { getCustomRepository } from 'typeorm';
-import { InputEntryDto, CreateEntryDto, readEntryDto } from '../dto/entry.dto';
+import { InputEntryDto, CreateEntryDto } from '../dto/entry.dto';
+import { readEntryDto } from 'src/model/entry-view.model';
 
 @Injectable()
 export class EntryService {
-  async readEntryList(): Promise<EntryEntity[]>{
+  async getEntryList(): Promise<EntryEntity[]>{
     const entryRepository: EntryRepository = getCustomRepository<EntryRepository>(EntryRepository);
     return await entryRepository.findAllEntry();
   }
-  async readEntryContentList(): Promise<EntryContentEntity[]>{
+  async getEntryContentList(): Promise<EntryContentEntity[]>{
     const entryContentRepository: EntryContentRepository = getCustomRepository<EntryContentRepository>(EntryContentRepository);
     return await entryContentRepository.findAllEntryContent();
   }
-  async readEntryCategoryList(): Promise<EntryCategoryEntity[]>{
+  async getEntryCategoryList(): Promise<EntryCategoryEntity[]>{
     const entryCategoryRepository: EntryCategoryRepository = getCustomRepository<EntryCategoryRepository>(EntryCategoryRepository);
     return await entryCategoryRepository.findAllEntryCategory();
   }
-  async readEntryPersonList(): Promise<EntryPersonEntity[]>{
+  async getEntryPersonList(): Promise<EntryPersonEntity[]>{
     const entryPersonRepository: EntryPersonRepository = getCustomRepository<EntryPersonRepository>(EntryPersonRepository);
     return await entryPersonRepository.findAllEntryPerson();
   }
-  async readEntryLinkList(): Promise<EntryLinkEntity[]>{
+  async getEntryLinkList(): Promise<EntryLinkEntity[]>{
     const entryLinkRepository: EntryLinkRepository = getCustomRepository<EntryLinkRepository>(EntryLinkRepository);
     return await entryLinkRepository.findAllEntryLink();
   }
 
-  async readEntry(uuid: string): Promise<any>{
+  async getEntry(uuid: string): Promise<any>{
     const entryRepository: EntryRepository = getCustomRepository<EntryRepository>(EntryRepository);
     const entryPersonRepository: EntryPersonRepository = getCustomRepository<EntryPersonRepository>(EntryPersonRepository);
     const entryCategoryRepository: EntryCategoryRepository = getCustomRepository<EntryCategoryRepository>(EntryCategoryRepository);

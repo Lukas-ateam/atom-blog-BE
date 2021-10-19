@@ -29,7 +29,7 @@ describe('EntryService', () => {
   it('Entry List (findAllEntry)', async() => {
     const result:any = '1';
     const repoResult:any = '2';
-    jest.spyOn(service, 'readEntry').mockImplementation(() => result);
+    jest.spyOn(service, 'getEntry').mockImplementation(() => result);
     jest.spyOn(entryRepo, 'findOneEntryById').mockImplementation(() => repoResult);
     expect(result).toEqual(repoResult);
   });

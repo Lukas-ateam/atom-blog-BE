@@ -6,10 +6,10 @@ export class EntryLinkRepository extends Repository<EntryLinkEntity>{
     async findAllEntryLink(){
         // return await this.createQueryBuilder('entry')
         // .getMany();
-        return this.find();
+        return await this.find();
     }
     async findEntryLinkById(uuid: string){   
-        return this.find({
+        return await this.find({
             where: {
                 entry: uuid
             },
