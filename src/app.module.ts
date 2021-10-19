@@ -8,6 +8,10 @@ import { EntryController } from './entry/entry.controller';
 import { EntryModule } from './entry/entry.module';
 import { EntryService } from './entry/entry.service';
 import { DatabaseModule } from '../libs/database/database.module';
+import { UserController } from './user/user.controller';
+import { UserService } from './user/user.service';
+import { UserModule } from './user/user.module';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
@@ -16,6 +20,7 @@ import { DatabaseModule } from '../libs/database/database.module';
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
     EntryModule,
+    UserModule,
     DatabaseModule,
   ],
   controllers: [AppController],

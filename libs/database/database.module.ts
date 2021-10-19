@@ -7,6 +7,8 @@ import { EntryContentEntity } from './entities/entry-content.entity';
 import { EntryCategoryEntity } from './entities/entry-category.entity';
 import { EntryPersonEntity } from './entities/entry-person.entity';
 import { EntryLinkEntity } from './entities/entry-link.entity';
+import { GraphQLModule } from '@nestjs/graphql';
+import { UserEntity } from './entities/user.entity';
 
 @Module({
     imports: [
@@ -29,9 +31,14 @@ import { EntryLinkEntity } from './entities/entry-link.entity';
                 EntryCategoryEntity,
                 EntryPersonEntity,
                 EntryLinkEntity,
+                UserEntity,
             ],
             synchronize: true,
             cli: {}
+        }),
+        GraphQLModule.forRoot({
+            debug: false,
+            autoSchemaFile: 'schema.gql'
         }),
     ]
 })
